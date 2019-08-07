@@ -1,1 +1,2 @@
-# spring-mvc-application
+# Spring MVC Application
+
