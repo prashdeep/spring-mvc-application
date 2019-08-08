@@ -13,6 +13,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -26,15 +28,20 @@ public class Employee {
     private long id;
 
     @NotBlank(message = "Name cannot be null")
+    @Column(name = "emp_name", nullable = false)
     private String name;
 
     @Range(min = 18, max = 58, message = "Employee age should be between 18 and 58")
     private int age;
 
+    @Column(name = "dob", nullable = false)
     private LocalDate dateOfBirth;
 
     @Range(min = 25000, max = 75000)
     private double salary;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Dependent> dependents = new HashSet<>();
 
     public Employee(long id, String name){
         this.id = id;
@@ -49,5 +56,10 @@ public class Employee {
             return this.dateOfBirth.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
         }
         return "";
+    }
+
+    public void addDependent(Dependent dependent){
+        this.dependents.add(dependent);
+        dependent.setEmployee(this);
     }
 }

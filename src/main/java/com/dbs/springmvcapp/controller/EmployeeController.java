@@ -1,5 +1,6 @@
 package com.dbs.springmvcapp.controller;
 
+import com.dbs.springmvcapp.model.Dependent;
 import com.dbs.springmvcapp.model.Employee;
 import com.dbs.springmvcapp.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,12 @@ public class EmployeeController {
             return "register";
             //throw  new ArithmeticException("Exception occurred");
         }
+
+        Dependent dependent = new Dependent();
+        dependent.setName("Lata");
+        dependent.setAge(45);
+
+        employee.addDependent(dependent);
 
         this.employeeService.saveEmployee(employee);
         return "dashboard";
