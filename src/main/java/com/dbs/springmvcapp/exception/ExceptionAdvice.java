@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class ExceptionAdvice {
 
-    @ExceptionHandler(ArithmeticException.class)
+    //@ExceptionHandler(RuntimeException.class)
     public String handleSQLException(HttpServletRequest request, Exception ex){
         System.out.println("Came inside the error block .........");
         return "error_test";
     }
 
-    @ExceptionHandler(RuntimeException.class)
+    /*@ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleRuntimeException(HttpServletRequest request, Exception ex){
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not Found");
-    }
+    }*/
 }

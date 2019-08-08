@@ -13,6 +13,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -25,13 +28,17 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotBlank(message = "Name cannot be null")
+    //@NotBlank(message = "Name cannot be null")
     private String name;
 
     @Range(min = 18, max = 58, message = "Employee age should be between 18 and 58")
     private int age;
 
     private LocalDate dateOfBirth;
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+    private Set<Dependent> dependents = new HashSet<>();
+
 
     @Range(min = 25000, max = 75000)
     private double salary;

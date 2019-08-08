@@ -8,6 +8,6 @@
     <title>Error</title>
 </head>
 <body>
-    <h1>Error occurred !!. Please try again after some time!!</h1>
+    <h1>Please try after some time.</h1>
 </body>
 </html>
