@@ -46,7 +46,7 @@ public class EmployeeRESTController {
         this.employeeService.saveEmployee(employee);
     }
     
-    @PutMapping(value="/employees/update/{id}",headers="Accept=application/json")
+    @PutMapping(value="/employees/{id}",headers="Accept=application/json")
     public ResponseEntity<Employee> update(@PathVariable long id,@RequestBody Employee employee){
       return this.employeeService.update(id,employee);
     }
@@ -54,7 +54,7 @@ public class EmployeeRESTController {
     
     
     
-    @DeleteMapping("/employees/delete/{id}")
+    @DeleteMapping("/employees/{id}")
     public ResponseEntity<?> delete(@PathVariable long id) {
       return this.employeeService.deleteEmployee(id);
     }
