@@ -28,10 +28,10 @@
             <td>${employee.id}</td>
             <td>${employee.name}</td>
             <td>${employee.dateOfBirth}</td>
-            <td><form action = "/api/v1/employees/update/${employee.id}">
+            <td><form action = "/api/v1/employees/${employee.id}">
             	<input type = "submit" value="Update">
             </form>  </td>
-   			<td><form action = "/api/v1/employees/delete/${employee.id}">
+   			<td><form action = "/api/v1/employees/${employee.id}">
             	<input type = "submit" value="Delete">
             </form>  </td>
 
