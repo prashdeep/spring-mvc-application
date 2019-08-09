@@ -2,7 +2,12 @@ package com.dbs.springmvcapp.controller;
 
 import com.dbs.springmvcapp.model.Dependent;
 import com.dbs.springmvcapp.model.Employee;
+import com.dbs.springmvcapp.model.Project;
 import com.dbs.springmvcapp.service.EmployeeService;
+import io.swagger.annotations.Contact;
+import io.swagger.annotations.Info;
+import io.swagger.annotations.License;
+import io.swagger.annotations.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +23,12 @@ import java.util.Arrays;
 
 @Controller
 @RequestMapping("/users")
+
 public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+
 
     @GetMapping(value = "/login")
     public String login(Model model){
@@ -72,6 +79,11 @@ public class EmployeeController {
         dependent.setAge(45);
 
         employee.addDependent(dependent);
+
+        Project project = new Project();
+        project.setName("Hitachi Data Consulting");
+
+        employee.addProject(project);
 
         this.employeeService.saveEmployee(employee);
         return "dashboard";

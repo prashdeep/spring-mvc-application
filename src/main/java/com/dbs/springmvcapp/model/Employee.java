@@ -1,8 +1,11 @@
 package com.dbs.springmvcapp.model;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +22,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table
-public class Employee {
+public class Employee extends AbstractPersistable<Long>{
 
     public Employee(){}
 
@@ -30,6 +33,12 @@ public class Employee {
     @NotBlank(message = "Name cannot be null")
     @Column(name = "emp_name", nullable = false)
     private String name;
+
+    private String password;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
     @Range(min = 18, max = 58, message = "Employee age should be between 18 and 58")
     private int age;
@@ -42,6 +51,10 @@ public class Employee {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Dependent> dependents = new HashSet<>();
+
+    @ManyToMany(mappedBy = "employees",cascade = CascadeType.ALL)
+    @Setter @Getter
+    private Set<Project> projects = new HashSet<>();
 
     public Employee(long id, String name){
         this.id = id;
@@ -61,5 +74,10 @@ public class Employee {
     public void addDependent(Dependent dependent){
         this.dependents.add(dependent);
         dependent.setEmployee(this);
+    }
+
+    public void addProject(Project project){
+        this.getProjects().add(project);
+        project.getEmployees().add(this);
     }
 }
